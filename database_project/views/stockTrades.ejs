@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>stockTrades</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <h1>거래내역</h1>
+
+    <% if (offers && offers.length > 0) { %>
+        <h2><%= offers[0].stock_name %>의 거래내역
+        </h2>
+    <% offers.forEach(offer => { %>
+        <div class="offers-box">            
+            <%= offer.offer_date %><br>
+            <% if (offer.type === "sell") { %>
+                <span class="sell">매도</span><br>
+                주문수량: <%= offer.quantity %> 
+                매도가: <%= offer.price %> <br>
+                총 가격: <%= offer.quantity * offer.price %>
+            <% } else { %>
+                <span class="buy">매수</span><br>
+                주문수량: <%= offer.quantity %>  
+                매수가: <%= offer.price %> <br>
+                총 가격: <%= offer.quantity * offer.price %>
+            <% } %><br>          
+        </div>
+        <br>
+        <% }) %> 
+    <% } else { %>
+        <p>거래가 없습니다</p>
+    <% } %>
+
+    <button id="home" type="button">홈으로</button>
+
+    <script>
+        const homeButton = document.getElementById("home");
+        homeButton.addEventListener('click', () => {
+            window.location = "http://localhost:3000/home";
+        });
+    </script>
+</body>
+</html>

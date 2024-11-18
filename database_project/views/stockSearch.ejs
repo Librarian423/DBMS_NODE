@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>stocksearch</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <h1>검색 결과</h1>
+    <form action="/stockSearch" method="post">    <label for="name">
+        <input type="text" name="name" id="name" placeholder="종목 검색..." required>
+        <input type="submit" value="검색">
+    </label>
+    </form>
+
+    <div class="results-container">
+        <% if (stocks.length > 0) { %>
+            <% stocks.forEach(stock => { %>
+                <div class="result-box">
+                    <div class="stock-name"><%= stock.name %></div>
+                    <div class="stock-info"><%= stock.stock_ticker  %>  
+                        <%= stock.exchange_code %>
+                        <form action="/stock" method="post">
+                            <input type="hidden" name="stock_ticker" value="<%= stock.stock_ticker %>">
+                            <input type="submit" value="정보">
+                        </form>  <br>  
+                        <form action="/stockgraph" method="post">
+                            <input type="hidden" name="stock_ticker" value="<%= stock.stock_ticker %>">
+                            <input type="submit" value="통계">
+                        </form>  
+                    </div>
+                </div>
+            <% }) %>
+        <% } else { %>
+            <p>검색 결과가 없습니다.</p>
+        <% } %>
+    </div>
+    
+    <button id = "home" type= "button">홈으로</button>
+    
+    <script>
+        const homeButton = document.getElementById("home");
+        homeButton.addEventListener('click', () => {
+           window.location = "http://localhost:3000/home";
+       })
+   </script>
+</body>
+</html>

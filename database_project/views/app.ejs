@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Page</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <h1>DataBase Assingment</h1>
+    <button id = "login" type= "button">로그인</button>
+    <button id = "signup" type= "button">회원가입</button>
+    <br>
+    <button id = "admin" type= "button">관리자</button>
+    <script>
+        const loginButton = document.getElementById("login");
+        const signupButton = document.getElementById("signup"); 
+        const adminpButton = document.getElementById("admin");
+
+        loginButton.addEventListener('click', () => {
+            window.location = "http://localhost:3000/login";
+        })
+        signupButton.addEventListener('click', () => {
+            window.location = "http://localhost:3000/signup";
+        })
+        adminpButton.addEventListener('click', () => {
+            window.location = "http://localhost:3000/admin";
+        })
+    </script>
+</body>
+</html>

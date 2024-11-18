@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+    <h1>홈</h1>
+    <h2>어서오세요 <%= user.user_name %> 님</h2>
+    <form action="/home" method="post"> 
+        <label for="name">
+        <input type="text" name="name" id="name" placeholder="종목 검색..." required>
+        <input type="submit" value="검색">
+    </label>
+    </form>
+
+    <button id="myAccount" type="button">내 계좌
+    </button>
+    <button id="myStocks" type="button">보유종목
+    </button>
+    <button id="stockList" type="button">종목
+    </button><br>
+    <button id="myTrades" type="button">거래내역
+    </button>    
+
+    <script>
+        const myAccountButton = document.getElementById("myAccount");
+        const myStocksButton = document.getElementById("myStocks"); 
+        const stockListButton = document.getElementById("stockList");
+        const myTradesButton = document.getElementById("myTrades");
+
+        myAccountButton.addEventListener('click', () => {
+            window.location = "http://localhost:3000/myAccount";
+        })
+        myStocksButton.addEventListener('click', () => {
+            window.location = "http://localhost:3000/myStocks";
+        })
+        stockListButton.addEventListener('click', () => {
+            window.location = "http://localhost:3000/stockList";
+        })
+        myTradesButton.addEventListener('click', () => {
+            window.location = "http://localhost:3000/myTrades";
+        })
+    </script>
+
+</body>
+
+</html>

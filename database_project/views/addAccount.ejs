@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <% if(typeof addAccountResult !== 'undefined' && addAccountResult === 'fail') {%>
+        <script>alert("중복된 계좌")</script>
+    <% } %>
+    <h1>계좌 추가</h1>
+    <form action="/addAccount" method="POST">
+        <label for="account_number">계좌번호:</label>
+        <input type="text" name="account_number" id="text" placeholder="계좌번호" required><br><br> 
+        
+        <label for="account_name">계좌명:</label>
+        <input type="account_name" name="account_name" id="text" placeholder="계좌 이름" required><br><br>
+        
+        <input type="submit" value="계좌추가"> 
+    </form>
+</body>
+</html>

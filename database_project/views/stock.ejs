@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>stocks</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+    <h1>종목 정보</h1>
+
+    <form action="/stockSearch" method="post">
+        <label for="name">
+            <input type="text" name="name" id="name" placeholder="종목 검색..." required>
+            <input type="submit" value="검색">
+        </label>
+    </form>
+    <h2>
+        <%= stock.name %>
+    </h2>
+    <p>
+        <%= stock.stock_ticker %>
+            <%= stock.exchange_code %>
+    </p> 
+
+    <div class="hypothetical-levels">
+        <h2>호가창</h2>
+        <% if (orderBook && orderBook.length > 0) { %>
+            <% orderBook.filter(order => order.type === 'hypothetical').forEach((level, index) => { %>
+                <% if (index < 5) { %>
+                    <div class="ask-price" onclick="setPricePlaceholder('<%= level.price %>', 'sell')">
+                        가격: <%= level.price %>
+                    </div>
+                <% } else { %>
+                    <div class="bid-price" onclick="setPricePlaceholder('<%= level.price %>', 'buy')">
+                        가격: <%= level.price %>
+                    </div>
+                <% } %>
+            <% }) %>
+        <% } else { %>
+            <p>가상의 호가가 없습니다.</p>
+        <% } %>
+    </div>
+    
+    
+    
+    
+
+    <form action="/buyStock" method="POST" onsubmit="return validateBuy()">
+        <label for="buyStock">
+            <h3>매수</h3>
+        </label>
+        가격<br>
+        <input type="number" name="buyPrice" id="buy-stock-price" placeholder="원" required min="1"><br>
+        <br>수량<br>
+        <input type="number" name="buyCount" id="buy-stock-count" placeholder="주" required min="1">
+
+        <input type="hidden" name="stock_ticker" value="<%= stock.stock_ticker %>">
+
+        <input type="submit" value="매수">
+    </form>
+
+    <br>
+
+    <form action="/sellStock" method="POST" onsubmit="return validateSell()">
+        <label for="sellStock">
+            <h3>매도</h3>
+        </label>
+        가격<br>
+        <input type="number" name="sellPrice" id="sell-stock-price" placeholder="원" required min="1"><br>
+        <br>수량<br>
+        <input type="number" name="sellCount" id="sell-stock-count" placeholder="주" required min="1">
+
+        <input type="hidden" name="stock_ticker" value="<%= stock.stock_ticker %>">
+
+        <input type="submit" value="매도">
+    </form>
+
+    <br>
+
+    <button id="home" type="button">홈으로</button>
+
+    <script>
+        const homeButton = document.getElementById("home");
+
+        homeButton.addEventListener('click', () => {
+            window.location = "http://localhost:3000/home";
+        });
+
+        // Validate Buy Form
+        function validateBuy() {
+            const price = document.getElementById("buy-stock-price").value;
+            const count = document.getElementById("buy-stock-count").value;
+            if (price <= 0 || count <= 0) {
+                alert("매수 금액과 수량은 0보다 커야 합니다.");
+                return false;
+            }
+            return true;
+        }
+
+        // Validate Sell Form
+        function validateSell() {
+            const price = document.getElementById("sell-stock-price").value;
+            const count = document.getElementById("sell-stock-count").value;
+            if (price <= 0 || count <= 0) {
+                alert("매도 금액과 수량은 0보다 커야 합니다.");
+                return false;
+            }
+            return true;
+        }
+
+        function setPricePlaceholder(price, type) {
+            const priceField = type === 'sell' ? document.getElementById("sell-stock-price") : document.getElementById("buy-stock-price");
+            priceField.placeholder = `${price} 원`;
+        }
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>myAccount</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <h1>계좌</h1>
+    <h2><%= user.user_name %> 님의 계좌 정보</h2>
+
+    <% if (account && account.length > 0) { %>
+        <h4><%= account[0].account_name %> - 
+            <%= account[0].account_number %>
+        </h4>
+        <h3 data-withholding="<%= account[0].withholding %>">
+            총 평가자산: <%= account[0].deposit + account[0].withholding %>원<br>
+            보유현금: <%= account[0].deposit%>원 
+            <br>
+            예수금: <%= account[0].withholding %>원
+
+        </h3>
+
+        <form action="/addDeposit" method="POST" onsubmit="return validateDeposit()">
+            <label for="deposit">입금금액:</label>
+            <input type="number" name="deposit" id="deposit" placeholder="금액" required min="1">
+            <input type="hidden" name="account_number" value="<%= account[0].account_number %>">
+            <input type="submit" value="입금"> 
+        </form>
+        
+        <br>
+
+        <form action="/withdraw" method="POST" onsubmit="return validateWithdraw()">
+            <label for="withdraw">출금금액:</label>
+            <input type="number" name="withdraw" id="withdraw" placeholder="금액" required min="1">
+            <input type="hidden" name="account_number" value="<%= account[0].account_number %>">
+            <input type="submit" value="출금"> 
+        </form>
+
+        <br><br> 
+
+        <form action="/addwithholding" method="POST" onsubmit="return validateAddwithholding()">
+            <label for="addwithholding">예수금 입금액:</label>
+            <input type="number" name="addwithholding" id="addwithholding" placeholder="금액" required min="1">
+            <input type="hidden" name="account_number" value="<%= account[0].account_number %>">
+            <input type="submit" value="입금"> 
+        </form>       
+
+        <br>
+        
+        <form action="/withdrawWithholding" method="POST" onsubmit="return validateWithdrawWithholding()">
+            <label for="withdrawWithholding">예수금 출금액:</label>
+            <input type="number" name="withdrawWithholding" id="withdrawWithholding" placeholder="금액" required min="1">
+            <input type="hidden" name="account_number" value="<%= account[0].account_number %>">
+            <input type="submit" value="출금"> 
+        </form>
+
+        <br>
+
+        <button id = "home" type= "button">홈으로</button>
+        
+    <% } else { %>
+        <p>계좌 정보가 없습니다.</p>
+        <button id = "home" type= "button">홈으로</button>
+        <button id="addAccount" type="button">계좌추가</button>
+    <% } %>
+
+    <script>
+        const homeButton = document.getElementById("home");
+
+        homeButton.addEventListener('click', () => {
+            window.location = "http://localhost:3000/home";
+        })
+
+        const addAccountButton = document.getElementById("addAccount");     
+
+        addAccountButton.addEventListener('click', () => {
+            window.location = "http://localhost:3000/addAccount";
+        })
+
+
+        // 입금 값이 양수인지 확인
+        function validateDeposit() {
+            const deposit = document.getElementById("deposit").value;
+            if (deposit <= 0) {
+                alert("입금 금액은 0보다 커야 합니다.");
+                return false;
+            }
+            return true;
+        }
+
+        // 출금 값이 양수인지 확인
+        function validateWithdraw() {
+            const withdraw = document.getElementById("withdraw").value; // Corrected ID
+            if (withdraw <= 0) {
+                alert("출금 금액은 0보다 커야 합니다.");
+                return false;
+            }
+            return true;
+        }
+
+        // 예수금 입금 값이 양수인지 확인
+        function validateAddwithholding() {
+            const addwithholding = document.getElementById("addwithholding").value;
+            if (addwithholding <= 0) {
+                alert("예수금 입금 금액은 0보다 커야 합니다.");
+                return false;
+            }
+            return true;
+        }
+
+        // 예수금 출금 값이 양수인지 확인
+        function validateWithdrawWithholding() {
+            const withdrawWithholding = document.getElementById("withdrawWithholding").value;
+            if (withdrawWithholding <= 0) {
+                alert("예수금 출금 금액은 0보다 커야 합니다.");
+                return false;
+            }
+            return true;
+        }
+
+
+    </script>
+</body>
+</html>

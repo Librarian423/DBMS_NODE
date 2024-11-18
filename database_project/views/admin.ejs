@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+    <% if(typeof adminResult !== 'undefined' && adminResult === 'fail') {%>
+        <script>alert("중복된 종목티커")</script>
+    <% } %>
+    <h1 id="login-header">주식 관리자</h1>
+    <div class="stock">
+        <h4>종목 Stock</h4>
+        
+        <form action="/admin" method="post">
+            <label for="stock_ticker">종목티커: 
+                <input type="text" name="stock_ticker" id="stock_ticker" placeholder="StockTicker" required>
+            </label>
+            <label for="exchange_code">거래소코드:
+                <input type="text" name="exchange_code" id="exchange_code" placeholder="ExchangeCode" required>
+            </label>
+            <label for="status">종목상태:
+                <input type="text" name="status" id="status" placeholder="status" required>
+            </label>
+            <label for="name">종목명:
+                <input type="text" name="name" id="name" placeholder="name" required>
+            </label>
+            
+            <input type="submit" value="생성">
+        </form>
+    </div>
+</body>
+
+</html>

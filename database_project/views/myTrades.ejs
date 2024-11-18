@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>myTrades</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <h1>거래내역</h1>
+    <h2><%= user.user_name %> 님의 거래내역</h2>
+    <form action="/myTradeSearch" method="post">
+        <label for="name">
+            <input type="date" name="start_date" id="start-date" required>
+            <input type="date" name="end_date" id="end-date" required>
+            <input type="text" name="name" id="name" placeholder="종목 검색..." required>
+            <input type="submit" value="검색">
+        </label>
+    </form>
+    
+    <% if (offers && offers.length > 0) { %>
+    <% offers.forEach(offer => { %>
+        <div class="offers-box">            
+            <b><%= offer.name %> <br></b>
+            <%= offer.stock_ticker%> <br>
+            <%= offer.offer_date %><br>
+            <% if (offer.type === "sell") { %>
+                <span class="sell">매도</span><br>
+                주문수량: <%= offer.quantity %> 
+                매도가: <%= offer.price  %> <br>
+                총 가격: <%= offer.quantity * offer.price %>
+            <% } else { %>
+                <span class="buy">매수</span><br>
+                주문수량: <%= offer.quantity %>  
+                매수가: <%= offer.price  %> <br>
+                총 가격: <%= offer.quantity * offer.price %>
+            <% } %><br>          
+        </div>
+        <br>
+        <% }) %> 
+    <% } 
+    else { %>
+        <p>거래가 없습니다</p>
+    <% } %>
+
+    <button id = "home" type= "button">홈으로</button>
+
+    <script>
+        const homeButton = document.getElementById("home");
+
+        homeButton.addEventListener('click', () => {
+            window.location = "http://localhost:3000/home";
+        })
+    </script>
+</body>
+</html>

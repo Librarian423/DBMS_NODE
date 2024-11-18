@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= ticker %> Stock Graph</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1><%= ticker %> Stock Graph</h1>
+
+    <canvas id="priceChart" width="400" height="200"></canvas>
+
+    <script>
+        // Labels and data passed from the server
+        const labels = '<%- labels %>;'  // Correctly parse the JSON data
+        const data = '<%- data %>;'      // Correctly parse the JSON data
+
+        const ctx = document.getElementById('priceChart').getContext('2d');
+        const priceChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: '<%= ticker %> - Average Open Price',
+                    data: data,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    fill: true,
+                    tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                return 'Open Price: ' + tooltipItem.raw.toFixed(2);
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Time (Minutes)'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Price (in currency)'
+                        },
+                        beginAtZero: false
+                    }
+                }
+            }
+        });
+    </script>
+    
+    <button id="home" type="button">홈으로</button>
+
+    <script>
+        const homeButton = document.getElementById("home");
+
+        homeButton.addEventListener('click', () => {
+            window.location = "http://localhost:3000/home";
+        });
+    </script>
+</body>
+</html>

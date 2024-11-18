@@ -1,0 +1,216 @@
+body {
+    font-family: Arial, sans-serif; /* 기본 폰트 설정 */
+}
+
+.form-group {
+    margin-bottom: 20px; /* 각 입력 필드 그룹 간격 조정 */
+}
+
+.spacing {
+    margin-bottom: 20px; /* 아래쪽 간격 설정 */
+}
+
+label {
+    display: block; /* 레이블을 블록 요소로 설정하여 아래로 나열 */
+    margin-bottom: 5px; /* 레이블과 입력 필드 간의 간격 조정 */
+}
+
+input[type="text"], input[type="password"] {
+    width: 20%; /* 입력 필드 너비를 100%로 설정 */
+    padding: 8px; /* 입력 필드의 내부 여백 */
+    border: 1px solid #ccc; /* 입력 필드 경계 스타일 */
+    border-radius: 4px; /* 둥근 모서리 */
+}
+
+input[type="submit"] {
+    padding: 10px 15px; /* 제출 버튼의 내부 여백 */
+    border: none; /* 제출 버튼 경계 제거 */
+    background-color: #4CAF50; /* 제출 버튼 배경색 */
+    color: white; /* 제출 버튼 텍스트 색상 */
+    border-radius: 4px; /* 둥근 모서리 */
+    cursor: pointer; /* 커서를 포인터로 변경 */
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049; /* 호버 시 제출 버튼 배경색 변화 */
+}
+
+h1 {
+    color: #333; /* 제목 색상 */
+    
+}
+
+button {
+    padding: 10px 20px; /* 버튼 내부 여백 */
+    margin: 10px; /* 버튼 간격 */
+    border: none; /* 기본 경계 제거 */
+    border-radius: 5px; /* 둥근 모서리 */
+    background-color: #4CAF50; /* 버튼 배경색 */
+    color: white; /* 버튼 텍스트 색상 */
+    font-size: 16px; /* 폰트 크기 */
+    cursor: pointer; /* 커서를 포인터로 변경 */
+    transition: background-color 0.3s; /* 배경색 변화에 부드러운 전환 효과 추가 */
+}
+
+button:hover {
+    background-color: #45a049; /* 호버 시 배경색 변경 */
+}
+
+.stock {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 300px; /* Adjust width as needed */
+}
+
+.stock label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.stock label input[type="text"] {
+    flex: 1;
+    padding: 5px;
+    margin-left: 10px;
+}
+
+input[type="submit"] {
+    align-self: flex-start;
+    padding: 5px 10px;
+}
+
+.results-dropdown {
+    border: 1px solid #ccc;
+    display: none; /* 기본적으로 검색 결과는 숨김 */
+    position: absolute;
+    background-color: white;
+    z-index: 1000; /* 다른 요소 위에 표시 */
+    max-height: 200px; /* 최대 높이 */
+    overflow-y: auto; /* 스크롤 가능 */
+}
+.result-item {
+    padding: 10px;
+    cursor: pointer; /* 마우스 커서가 포인터로 변경 */
+}
+.result-item:hover {
+    background-color: #f0f0f0; /* hover 시 배경색 변경 */
+}
+
+/* 결과 컨테이너 스타일 */
+.results-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* 좌측 정렬 */
+    gap: 10px; /* 각 결과 박스 사이의 간격 */
+    margin-top: 20px;
+    padding-left: 20px; /* 좌측 여백 추가 */
+}
+
+/* 결과 박스 스타일 */
+.result-box {
+    width: 100%; /* 박스가 컨테이너 너비에 맞게 확장 */
+    max-width: 350px; /* 최대 너비 설정 */
+    padding: 15px;
+    border: 1px solid #ccc; /* 테두리 색 */
+    border-radius: 8px; /* 모서리 둥글게 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 박스 그림자 */
+    background-color: #f9f9f9; /* 배경 색 */
+    text-align: left; /* 텍스트 좌측 정렬 */
+    transition: background-color 0.3s ease; /* 호버 효과 */
+}
+
+.result-box:hover {
+    background-color: #e9ecef; /* 호버 시 배경색 변경 */
+}
+
+/* 주식명 스타일 */
+.stock-name {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #333;
+}
+
+/* 주식 정보 스타일 */
+.stock-info {
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 1px;
+}
+
+.stock-info2 {
+    font-size: 0.6em;
+    color: #666;
+    margin-top: 1px;
+    margin-bottom: 3px;
+}
+
+.sell {
+    color: blue; /* For 매도 (sell) */
+}
+
+.buy {
+    color: red;  /* For 매수 (buy) */
+}
+
+.offers-box {
+    width: 100%; /* 박스가 컨테이너 너비에 맞게 확장 */
+    max-width: 300px; /* 최대 너비 설정 */
+    padding: 15px;
+    border: 1px solid #ccc; /* 테두리 색 */
+    border-radius: 8px; /* 모서리 둥글게 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 박스 그림자 */
+    background-color: #f9f9f9; /* 배경 색 */
+    text-align: left; /* 텍스트 좌측 정렬 */
+    transition: background-color 0.3s ease; /* 호버 효과 */
+}
+
+.order-book table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.order-book th, .order-book td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.order-book th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.ask-price, .bid-price {
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+    color: #fff;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.ask-price {
+    width: 100%; /* 박스가 컨테이너 너비에 맞게 확장 */
+    max-width: 300px;
+    background-color: #007bff;
+}
+
+.bid-price {
+    width: 100%; /* 박스가 컨테이너 너비에 맞게 확장 */
+    max-width: 300px;
+    background-color: #ff4d4d;
+}
+
+.ask-price:hover {
+    width: 100%; /* 박스가 컨테이너 너비에 맞게 확장 */
+    max-width: 300px;
+    background-color: #0056b3;
+}
+
+.bid-price:hover {
+    width: 100%; /* 박스가 컨테이너 너비에 맞게 확장 */
+    max-width: 300px;
+    background-color: #cc0000;
+}
